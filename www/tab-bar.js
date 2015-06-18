@@ -21,22 +21,14 @@ function TabBar() {
 
     this.tabBarTag = 0;
     this.toolBarIndexes = 0;
+    this.tabBarItems = [];
+    this.nameTags = {};
 
     this.tabBarCallbacks = {};
-    this.toolBarCallbacks = {};
-
-    this.tappedToolBarItem = null;
     this.selectedTabBarItem = null;
 
-    exec( function ( tab ) { self.tabBarItemSelected( tab ); }, function () {}, this.serviceName, 'bindListener', [] );
+    exec( function ( tab ) { self.itemSelected( tab ); }, function () {}, this.serviceName, 'bindListener', [] );
 }
-
-/**
- * Create a native tab bar that can have tab buttons added to it which can respond to events.
- */
-TabBar.prototype.createTabBar = function () {
-    exec( null, null, this.serviceName, "createTabBar", [] );
-};
 
 /**
  * Show a tab bar.  The tab bar has to be created first.
@@ -44,7 +36,7 @@ TabBar.prototype.createTabBar = function () {
  * - \c height integer indicating the height of the tab bar (default: \c 49)
  * - \c position specifies whether the tab bar will be placed at the \c top or \c bottom of the screen (default: \c bottom)
  */
-TabBar.prototype.showTabBar = function ( options ) {
+TabBar.prototype.show = function ( options ) {
     if ( !options ) options = {'position': 'bottom'};
     exec( null, null, this.serviceName, "showTabBar", [ options ] );
 };
@@ -52,7 +44,7 @@ TabBar.prototype.showTabBar = function ( options ) {
 /**
  * Hide a tab bar.  The tab bar has to be created first.
  */
-TabBar.prototype.hideTabBar = function ( animate ) {
+TabBar.prototype.hide = function ( animate ) {
     if ( animate == undefined || animate == null ) animate = true;
     exec( null, null, this.serviceName, "hideTabBar", [ { animate: animate } ] );
 };
@@ -77,18 +69,18 @@ TabBar.prototype.hideTabBar = function ( animate ) {
  *   - tabButton:MostRecent
  *   - tabButton:MostViewed
  * @param {String} name internal name to refer to this tab by
- * @param {String} [title] title text to show on the tab, or null if no text should be shown
- * @param {String} [image] image filename or internal identifier to show, or null if now image should be shown
+ * @param {String} [label] title text to show on the tab, or null if no text should be shown
+ * @param {String} [image] image filename or internal identifier to show, or null if no image should be shown
  * @param {Object} [options] Options for customizing the individual tab item
  *  - \c badge value to display in the optional circular badge on the item; if null or unspecified, the badge will be hidden
  */
-TabBar.prototype.createTabBarItem = function ( name, label, image, options ) {
-
+TabBar.prototype.createItem = function ( name, label, image, options ) {
     var tag = this.tabBarTag++;
     if ( options && 'onSelect' in options && typeof(options['onSelect']) == 'function' ) {
         this.tabBarCallbacks[tag] = {'onSelect': options.onSelect, 'name': name};
-        //delete options.onSelect;
     }
+    this.tabBarItems.push(name);
+    this.nameTags[name] = tag;
     exec( null, null, this.serviceName, "createTabBarItem", [ name, label, image, tag, options ] );
 };
 
@@ -98,37 +90,40 @@ TabBar.prototype.createTabBarItem = function ( name, label, image, options ) {
  * @param {Object} options Options for customizing the individual tab item
  *  - \c badge value to display in the optional circular badge on the item; if null or unspecified, the badge will be hidden
  */
-TabBar.prototype.updateTabBarItem = function ( name, options ) {
+TabBar.prototype.updateItem = function ( name, options ) {
     if ( !options ) options = {};
     exec( null, null, this.serviceName, "updateTabBarItem", [ name, options ] );
 };
 
 /**
  * Show previously created items on the tab bar
- * @param {String} arguments... the item names to be shown
  * @param {Object} [options] dictionary of options, notable options including:
  *  - \c animate indicates that the items should animate onto the tab bar
  * @see createTabBarItem
  * @see createTabBar
  */
-TabBar.prototype.showTabBarItems = function () {
-    var argv = [];
-    for ( var i = 0; i < arguments.length; i++ ) {
-        argv.push( arguments[i] );
-    }
-    exec( null, null, this.serviceName, "showTabBarItems", argv );
+TabBar.prototype.showItems = function (options) {
+  exec( null, null, this.serviceName, "showTabBarItems", [this.tabBarItems, options] );
 };
 
+/**
+ * Show specific items on the tab bar
+ * @param {[String]} names array of names to display
+ * @param {Object} options Options for customizing the individual tab item
+ *  - \c badge value to display in the optional circular badge on the item; if null or unspecified, the badge will be hidden
+ */
+TabBar.prototype.showNamedItems = function (names, options) {
+  exec( null, null, this.serviceName, "showTabBarItems", [names, options]);
+};
 
 /**
  * Function to detect currently selected tab bar item
  * @see createTabBarItem
  * @see showTabBarItems
  */
-TabBar.prototype.getSelectedTabBarItem = function () {
+TabBar.prototype.getSelectedItem = function () {
     return this.selectedTabBarItem;
 };
-
 
 /**
  * Manually select an individual tab bar item, or nil for deselecting a currently selected tab bar item.
@@ -136,15 +131,16 @@ TabBar.prototype.getSelectedTabBarItem = function () {
  * @see createTabBarItem
  * @see showTabBarItems
  */
-TabBar.prototype.selectTabBarItem = function ( tab ) {
+TabBar.prototype.selectItem = function ( tab ) {
     exec( null, null, this.serviceName, "selectTabBarItem", [ tab ] );
+    this.itemSelected(this.nameTags[tab]);
 };
 
 /**
  * Function called when a tab bar item has been selected.
  * @param {Number} tag the tag number for the item that has been selected
  */
-TabBar.prototype.tabBarItemSelected = function ( tag ) {
+TabBar.prototype.itemSelected = function ( tag ) {
     this.selectedTabBarItem = tag;
     if ( typeof(this.tabBarCallbacks[tag].onSelect) == 'function' )
         this.tabBarCallbacks[tag].onSelect( this.tabBarCallbacks[tag].name );
