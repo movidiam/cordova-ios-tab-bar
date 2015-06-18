@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="com.mymee.cordova.plugins.ios-tab-bar"
+        id="com.squerb.cordova.plugins.ios-tab-bar"
         version="1.0.0">
 
     <name>Tab Bar Plugin for Cordova iOS</name>

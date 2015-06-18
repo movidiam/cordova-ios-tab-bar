@@ -1,7 +1,7 @@
 {
   "name": "cordova-ios-tab-bar",
   "version": "0.1.0",
-  "description": "Cordova >=3 iOS Tab Bar plugin",
+  "description": "Cordova >=5 iOS Tab Bar plugin",
   "main": "",
   "directories": {
     "example": "example"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tblomseth/cordova-ios-tab-bar.git"
+    "url": "https://github.com/squerb/cordova-ios-tab-bar"
   },
   "keywords": [
     "Cordova",
@@ -21,10 +21,10 @@
     "ui",
     "tab bar"
   ],
-  "author": "tblomseth",
+  "author": "derekclee",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tblomseth/cordova-ios-tab-bar/issues"
+    "url": "https://github.com/squerb/cordova-ios-tab-bar/issues"
   },
-  "homepage": "https://github.com/tblomseth/cordova-ios-tab-bar"
+  "homepage": "https://github.com/squerb/cordova-ios-tab-bar"
 }
