@@ -58,16 +58,11 @@
 	[tabBar sizeToFit];
 	tabBar.delegate = self;
 
-  if ( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-    tabBar.barStyle = UIBarStyleBlack;
-    tabBar.translucent = NO;
-    tabBar.barTintColor = [UIColor colorWithRed:0.122 green:0.122 blue:0.122 alpha:1]; /*#1f1f1f*/
-    tabBar.tintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1]; /*#ffffff*/
-  } else {
-    // Pre iOS 7
-    tabBar.opaque = YES;
-  }
-  
+  tabBar.barStyle = UIBarStyleDefault;
+  tabBar.translucent = YES;
+  // tabBar.barTintColor = [UIColor colorWithRed:0.122 green:0.122 blue:0.122 alpha:1]; /*#1f1f1f*/
+  // tabBar.tintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1]; /*#ffffff*/
+
 	tabBar.multipleTouchEnabled   = NO;
 	tabBar.autoresizesSubviews    = YES;
 	tabBar.hidden                 = YES;
@@ -139,7 +134,7 @@
   {
     tabBarBounds = CGRectMake(
                               webViewBounds.origin.x,
-                              webViewBounds.origin.y + webViewBounds.size.height - height,
+                              webViewBounds.origin.y + webViewBounds.size.height - height + 20,
                               webViewBounds.size.width,
                               height
                               );
@@ -169,7 +164,7 @@
   [tabBar setFrame:tabBarBounds];
 
 
-  [self.webView setFrame:webViewBounds];
+  // [self.webView setFrame:webViewBounds];
 
   CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
   [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
