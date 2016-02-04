@@ -140,7 +140,7 @@
                               );
     webViewBounds = CGRectMake(
                                webViewBounds.origin.x,
-                               webViewBounds.origin.y,
+                               webViewBounds.origin.y + 20,
                                webViewBounds.size.width,
                                webViewBounds.size.height - height
                                );
@@ -164,7 +164,7 @@
   [tabBar setFrame:tabBarBounds];
 
 
-  // [self.webView setFrame:webViewBounds];
+  [self.webView setFrame:webViewBounds];
 
   CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
   [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
