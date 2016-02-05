@@ -61,8 +61,7 @@
   tabBar.barStyle = UIBarStyleDefault;
   tabBar.translucent = YES;
   // tabBar.barTintColor = [UIColor colorWithRed:0.122 green:0.122 blue:0.122 alpha:1]; /*#1f1f1f*/
-  // tabBar.tintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1]; /*#ffffff*/
-
+  // tabBar.tintColor = [UIColor colorWithRed:0.282 green:0.286 blue:0.373 alpha:1]; /*#ffffff*/
 	tabBar.multipleTouchEnabled   = NO;
 	tabBar.autoresizesSubviews    = YES;
 	tabBar.hidden                 = YES;
@@ -259,7 +258,9 @@
   }
 
   if (!item) {
-    item = [[UITabBarItem alloc] initWithTitle:title image:[UIImage imageNamed:imageName] tag:tag];
+    UIImage *tabIcon = [UIImage imageNamed:imageName];
+    tabIcon = [tabIcon imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item = [[UITabBarItem alloc] initWithTitle:title image:tabIcon selectedImage:tabIcon tag:tag];
   }
 
   // Set badge if needed
