@@ -227,7 +227,7 @@
 {
 
   NSArray *arguments = command.arguments;
-  NSDictionary *options = arguments.count > 4 ? [arguments objectAtIndex:4]: nil;
+  NSDictionary *options = arguments.count > 5 ? [arguments objectAtIndex:5]: nil;
 
   if (!tabBar) {
     [self createTabBar:nil];
@@ -236,7 +236,8 @@
   NSString  *name      = [arguments objectAtIndex:0];
   NSString  *title     = [arguments objectAtIndex:1];
   NSString  *imageName = [arguments objectAtIndex:2];
-  int tag              = [[arguments objectAtIndex:3] intValue];
+  NSString *selectedImage = [arguments objectAtIndex:3];
+  int tag              = [[arguments objectAtIndex:4] intValue];
   
   UITabBarItem *item = nil;
   if ([imageName length] > 0) {
@@ -259,13 +260,15 @@
 
   if (!item) {
     UIImage *tabIcon = [UIImage imageNamed:imageName];
+    UIImage *selectedTabIcon = [UIImage imageNamed:selectedImage];
     tabIcon = [tabIcon imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    item = [[UITabBarItem alloc] initWithTitle:title image:tabIcon selectedImage:tabIcon tag:tag];
+    item = [[UITabBarItem alloc] initWithTitle:title image:tabIcon selectedImage:selectedTabIcon];
   }
 
   // Set badge if needed
-  if ([options objectForKey:@"badge"])
+  if ([options objectForKey:@"badge"]) {
     item.badgeValue = [options objectForKey:@"badge"];
+  }
 
   [tabBarItems setObject:item forKey:name];
 
@@ -369,7 +372,7 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
 	// Create Plugin Result
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:item.tag];
+	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:item.title];
   [pluginResult setKeepCallbackAsBool:true];
   [self.commandDelegate sendPluginResult:pluginResult callbackId:self.listenerCallbackId];
 }

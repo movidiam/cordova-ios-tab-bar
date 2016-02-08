@@ -74,14 +74,14 @@ TabBar.prototype.hide = function ( animate ) {
  * @param {Object} [options] Options for customizing the individual tab item
  *  - \c badge value to display in the optional circular badge on the item; if null or unspecified, the badge will be hidden
  */
-TabBar.prototype.createItem = function ( name, label, image, options ) {
+TabBar.prototype.createItem = function ( name, label, image, selectedImage, options ) {
     var tag = this.tabBarTag++;
     if ( options && 'onSelect' in options && typeof(options['onSelect']) == 'function' ) {
-        this.tabBarCallbacks[tag] = {'onSelect': options.onSelect, 'name': name};
+        this.tabBarCallbacks[label] = {'onSelect': options.onSelect, 'name': name};
     }
     this.tabBarItems.push(name);
     this.nameTags[name] = tag;
-    exec( null, null, this.serviceName, "createTabBarItem", [ name, label, image, tag, options ] );
+    exec( null, null, this.serviceName, "createTabBarItem", [ name, label, image, selectedImage, tag, options ] );
 };
 
 /**
@@ -140,10 +140,10 @@ TabBar.prototype.selectItem = function ( tab ) {
  * Function called when a tab bar item has been selected.
  * @param {Number} tag the tag number for the item that has been selected
  */
-TabBar.prototype.itemSelected = function ( tag ) {
-    this.selectedTabBarItem = tag;
-    if ( typeof(this.tabBarCallbacks[tag].onSelect) == 'function' )
-        this.tabBarCallbacks[tag].onSelect( this.tabBarCallbacks[tag].name );
+TabBar.prototype.itemSelected = function ( label ) {
+    this.selectedTabBarItem = label;
+    if ( typeof(this.tabBarCallbacks[label].onSelect) == 'function' )
+        this.tabBarCallbacks[label].onSelect( this.tabBarCallbacks[label].name );
 };
 
 module.exports = new TabBar();
