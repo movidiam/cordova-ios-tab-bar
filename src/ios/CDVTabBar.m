@@ -61,11 +61,14 @@
   tabBar.barStyle = UIBarStyleDefault;
   tabBar.translucent = YES;
   // tabBar.barTintColor = [UIColor colorWithRed:0.122 green:0.122 blue:0.122 alpha:1]; /*#1f1f1f*/
-  // tabBar.tintColor = [UIColor colorWithRed:0.282 green:0.286 blue:0.373 alpha:1]; /*#ffffff*/
+  // tabBar.tintColor = [UIColor colorWithRed:0.188 green:0.565 blue:0.878 alpha:1]; /*#ffffff*/
 	tabBar.multipleTouchEnabled   = NO;
 	tabBar.autoresizesSubviews    = YES;
 	tabBar.hidden                 = YES;
 	tabBar.userInteractionEnabled = YES;
+
+  [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.188 green:0.565 blue:0.878 alpha:1], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+  [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.498 green:0.337 blue:0.58 alpha:1], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
 
   self.webView.superview.autoresizesSubviews = YES;
 
@@ -262,7 +265,7 @@
     UIImage *tabIcon = [UIImage imageNamed:imageName];
     UIImage *selectedTabIcon = [UIImage imageNamed:selectedImage];
     tabIcon = [tabIcon imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    item = [[UITabBarItem alloc] initWithTitle:title image:tabIcon selectedImage:selectedTabIcon];
+    item = [[UITabBarItem alloc] initWithTitle:title image:tabIcon selectedImage:tabIcon];
   }
 
   // Set badge if needed
