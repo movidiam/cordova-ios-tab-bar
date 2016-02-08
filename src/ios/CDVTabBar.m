@@ -68,7 +68,7 @@
 	tabBar.userInteractionEnabled = YES;
 
   [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.188 green:0.565 blue:0.878 alpha:1], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-  [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.498 green:0.337 blue:0.58 alpha:1], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+  [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.247 green:0.251 blue:0.333 alpha:1.0], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
 
   self.webView.superview.autoresizesSubviews = YES;
 
@@ -265,7 +265,8 @@
     UIImage *tabIcon = [UIImage imageNamed:imageName];
     UIImage *selectedTabIcon = [UIImage imageNamed:selectedImage];
     tabIcon = [tabIcon imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    item = [[UITabBarItem alloc] initWithTitle:title image:tabIcon selectedImage:tabIcon];
+    selectedTabIcon = [selectedTabIcon imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item = [[UITabBarItem alloc] initWithTitle:title image:tabIcon selectedImage:selectedTabIcon];
   }
 
   // Set badge if needed
