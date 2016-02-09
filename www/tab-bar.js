@@ -133,7 +133,6 @@ TabBar.prototype.getSelectedItem = function () {
  */
 TabBar.prototype.selectItem = function ( tab ) {
     exec( null, null, this.serviceName, "selectTabBarItem", [ tab ] );
-    this.itemSelected(this.nameTags[tab]);
 };
 
 /**
