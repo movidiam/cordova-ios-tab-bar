@@ -60,7 +60,7 @@
 
   tabBar.barStyle = UIBarStyleDefault;
   tabBar.translucent = YES;
-  // tabBar.barTintColor = [UIColor colorWithRed:0.122 green:0.122 blue:0.122 alpha:1]; /*#1f1f1f*/
+  tabBar.barTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1]; /*#fff*/
   // tabBar.tintColor = [UIColor colorWithRed:0.188 green:0.565 blue:0.878 alpha:1]; /*#ffffff*/
 	tabBar.multipleTouchEnabled   = NO;
 	tabBar.autoresizesSubviews    = YES;
