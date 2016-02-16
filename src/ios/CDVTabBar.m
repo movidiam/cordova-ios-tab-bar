@@ -68,7 +68,7 @@
 	tabBar.userInteractionEnabled = YES;
 
   [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.188 green:0.565 blue:0.878 alpha:1], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-  [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.247 green:0.251 blue:0.333 alpha:1.0], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+  [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:0.565 green:0.565 blue:0.565 alpha:1.0], UITextAttributeTextColor, nil] forState:UIControlStateNormal];
 
   self.webView.superview.autoresizesSubviews = YES;
 
