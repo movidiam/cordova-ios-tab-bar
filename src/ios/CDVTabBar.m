@@ -54,13 +54,13 @@
 - (void)createTabBar:(CDVInvokedUrlCommand*)command
 {
 	tabBar = [UITabBar new];
-	tabBar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-	[tabBar sizeToFit];
-	tabBar.delegate = self;
+  tabBar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+  [tabBar sizeToFit];
+  tabBar.delegate = self;
 
-  tabBar.barStyle = UIBarStyleDefault;
-  tabBar.translucent = YES;
+  // tabBar.barStyle = UIBarStyleDefault;
   tabBar.barTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1]; /*#fff*/
+  tabBar.translucent = NO;
   // tabBar.tintColor = [UIColor colorWithRed:0.188 green:0.565 blue:0.878 alpha:1]; /*#ffffff*/
 	tabBar.multipleTouchEnabled   = NO;
 	tabBar.autoresizesSubviews    = YES;
