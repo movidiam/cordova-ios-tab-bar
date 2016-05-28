@@ -136,7 +136,7 @@
   {
     tabBarBounds = CGRectMake(
                               webViewBounds.origin.x,
-                              webViewBounds.origin.y + webViewBounds.size.height - height + 20,
+                              webViewBounds.origin.y + webViewBounds.size.height - height,// + 20,
                               webViewBounds.size.width,
                               height
                               );
